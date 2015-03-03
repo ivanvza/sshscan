@@ -15,8 +15,8 @@ class bcolours:
     ENDC = '\033[0m'
 
 #The log file paramiko is writing too.
-#Uncomment it if you want to use it.
-#paramiko.util.log_to_file('sshscanner.log')
+#Required for the No handlers could be found for logger "paramiko.transport" error.
+paramiko.util.log_to_file('sshscanner.log')
 
 options = optparse.OptionParser(usage='%prog -i <IP>', description='SSH configuration scanner')
 options.add_option('-i', '--IP', type='string', dest='IP', help='The hostname / IP')
