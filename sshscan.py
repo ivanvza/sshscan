@@ -69,11 +69,14 @@ def test_weak_macs(hostname, port, verbose):
         t.start_client()
         if mac in weak_macs:
             print(bcolours.FAIL + '  [Weak] ' + mac + ' supported' + bcolours.ENDC)
+            close_connection(t, s)
         else:
             if verbose:
                 print('  [Accepted] ' + mac + 'supported')
+                close_connection(t, s)
         if verbose:
             print (bcolours.OKBLUE + '  [Rejected] ' + mac + bcolours.ENDC)
+            close_connection(t, s)
     close_connection(t, s)
 
 def grab_banner(hostname, port):
