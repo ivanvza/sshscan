@@ -15,7 +15,7 @@ class bcolours:
     ENDC = '\033[0m'
 
 #The log file paramiko is writing too.
-#Required for the No handlers could be found for logger "paramiko.transport" error.
+#Log file is required.
 paramiko.util.log_to_file('sshscanner.log')
 
 options = optparse.OptionParser(usage='%prog -i <IP>', description='SSH configuration scanner')
@@ -51,11 +51,14 @@ def test_weak_ciphers(hostname, port, verbose):
         t.start_client()
         if cipher in weak_ciphers:
             print(bcolours.FAIL + '  [Weak] ' + cipher + ' supported' + bcolours.ENDC)
+            close_connection(t, s)
         else:
             if verbose:
                 print('  [Accepted] ' + cipher + ' supported')
+                close_connection(t, s)
         if verbose:
             print(bcolours.OKBLUE + '  [Rejected] ' + cipher + bcolours.ENDC)
+            close_connection(t, s)
     close_connection(t, s)
 
 def test_weak_macs(hostname, port, verbose):
@@ -79,6 +82,7 @@ def grab_banner(hostname, port):
 
 def connect(hostname, port):
     try:
+        paramiko.util.log_to_file('sshscanner.log')
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(3.0)
         sock.connect((hostname, port))
