@@ -1,18 +1,17 @@
 #SSHscan
-Firstly, this script makes use of [Paramiko](https://github.com/paramiko/paramiko "Paramiko"), so it will have to be installed before hand..
 
 This was made to scan for 
-* Weak CBC Ciphers
-* Weak MAC Algorithms
-* Authentication methods supported
+* CBC Ciphers
+* MAC Algorithms
+* Kex Algorithms
 
-No other requirements are needed, only Paramiko.
+Future additions:
+* Determine authentication methods.
+
+No other requirements are needed.
 
 ##Installation
 ```
-git clone https://github.com/paramiko/paramiko.git
-cd paramiko
-python setup.py install
 git clone https://github.com/ivanvza/sshscan.git
 ```
 
@@ -20,12 +19,12 @@ git clone https://github.com/ivanvza/sshscan.git
 ```
 $ ./sshscan.py
 
-   _____ _____  __  __ _____
-  / ___// ___/ / / / // ___/ _____ ____ _ ____   ____   ___   _____
-  \__ \ \__ \ / /_/ / \__ \ / ___// __ `// __ \ / __ \ / _ \ / ___/
- ___/ /___/ // __  / ___/ // /__ / /_/ // / / // / / //  __// /
-/____//____//_/ /_/ /____/ \___/ \__,_//_/ /_//_/ /_/ \___//_/
-                                                -@viljoenivan
+       _____ _____  __  __ _____
+      / ___// ___/ / / / // ___/ _____ ____ _ ____   ____   ___   _____
+      \__ \ \__ \ / /_/ / \__ \ / ___// __ `// __ \ / __ \ / _ \ / ___/
+     ___/ /___/ // __  / ___/ // /__ / /_/ // / / // / / //  __// /
+    /____//____//_/ /_/ /____/ \___/ \__,_//_/ /_//_/ /_/ \___//_/
+                                                    -@viljoenivan
 
 Usage: sshscan.py -i <IP>
 
@@ -33,7 +32,8 @@ SSH configuration scanner
 
 Options:
   -h, --help            show this help message and exit
-  -i IP, --IP=IP        The hostname / IP
+  -t TARGET, --target=TARGET
+                        The target hostname / IP
   -p PORT, --port=PORT  Port of the SSH
   -v                    Verbose, show all information
 ```
@@ -41,68 +41,57 @@ Options:
 ##Sample Output
 
 ```
- $ ./sshscan.py -i localhost -v
+$ ./sshscan.py -t localhost -v
+
+       _____ _____  __  __ _____
+      / ___// ___/ / / / // ___/ _____ ____ _ ____   ____   ___   _____
+      \__ \ \__ \ / /_/ / \__ \ / ___// __ `// __ \ / __ \ / _ \ / ___/
+     ___/ /___/ // __  / ___/ // /__ / /_/ // / / // / / //  __// /
+    /____//____//_/ /_/ /____/ \___/ \__,_//_/ /_//_/ /_/ \___//_/
+                                                    -@viljoenivan
 
 
-   _____ _____  __  __ _____
-  / ___// ___/ / / / // ___/ _____ ____ _ ____   ____   ___   _____
-  \__ \ \__ \ / /_/ / \__ \ / ___// __ `// __ \ / __ \ / _ \ / ___/
- ___/ /___/ // __  / ___/ // /__ / /_/ // / / // / / //  __// /
-/____//____//_/ /_/ /____/ \___/ \__,_//_/ /_//_/ /_/ \___//_/
-                                                -@viljoenivan
+[Info] Banner: SSH-2.0-OpenSSH_6.2
 
-[Info] Connecting to: localhost:22...
-[Success] Connection to localhost:22 established...
-
-[Info] Banner: SSH-2.0-OpenSSH
-
-[Info] Testing SSH Ciphers...
+[Info] Evaluating SSH Ciphers...
   [Weak] 3des-cbc supported
-  [Rejected] 3des-cbc
   [Weak] aes128-cbc supported
-  [Rejected] aes128-cbc
   [Weak] aes192-cbc supported
-  [Rejected] aes192-cbc
   [Weak] aes256-cbc supported
-  [Rejected] aes256-cbc
-  [Accepted] arcfour supported
-  [Rejected] arcfour
+  [Good] aes128-ctr supported
+  [Good] aes192-ctr supported
+  [Good] aes256-ctr supported
+  [Good] aes128-gcm@openssh.com supported
+  [Good] aes256-gcm@openssh.com supported
+  [Good] arcfour supported
+  [Good] arcfour128 supported
+  [Good] arcfour256 supported
   [Weak] blowfish-cbc supported
-  [Rejected] blowfish-cbc
   [Weak] cast128-cbc supported
-  [Rejected] cast128-cbc
-  [Accepted] twofish-cbc supported
-  [Rejected] twofish-cbc
-  [Accepted] twofish128-cbc supported
-  [Rejected] twofish128-cbc
-  [Accepted] twofish192-cbc supported
-  [Rejected] twofish192-cbc
-  [Accepted] twofish256-cbc supported
-  [Rejected] twofish256-cbc
-  [Accepted] cast128-12-cbc@ssh.com supported
-  [Rejected] cast128-12-cbc@ssh.com
-  [Accepted] des-cbc@ssh.com supported
-  [Rejected] des-cbc@ssh.com
-  [Accepted] seed-cbc@ssh.com supported
-  [Rejected] seed-cbc@ssh.com
-  [Accepted] rijndael-cbc@ssh.com supported
-  [Rejected] rijndael-cbc@ssh.com
 
-[Info] Testing SSH Mac algorithms...
+[Info] Evaluating SSH MAC Algorithms...
   [Weak] hmac-md5 supported
-  [Rejected] hmac-md5
   [Weak] hmac-md5-96 supported
-  [Rejected] hmac-md5-96
-  [Accepted] hmac-sha1supported
-  [Rejected] hmac-sha1
+  [Good] hmac-ripemd160 supported
+  [Good] hmac-sha1 supported
   [Weak] hmac-sha1-96 supported
-  [Rejected] hmac-sha1-96
-  [Accepted] hmac-sha256@ssh.comsupported
-  [Rejected] hmac-sha256@ssh.com
-  [Accepted] hmac-sha256-96@ssh.comsupported
-  [Rejected] hmac-sha256-96@ssh.com
+  [Good] hmac-sha2-256 supported
+  [Good] hmac-sha2-512 supported
+  [Good] umac-64 supported
+  [Good] umac-128 supported
+  [Good] hmac-md5-etm@openssh.com supported
+  [Good] hmac-md5-96-etm@openssh.com supported
+  [Good] hmac-ripemd160-etm@openssh.com supported
+  [Good] hmac-sha1-etm@openssh.com supported
+  [Good] hmac-sha1-96-etm@openssh.com supported
+  [Good] hmac-sha2-256-etm@openssh.com supported
+  [Good] hmac-sha2-512-etm@openssh.com supported
+  [Good] umac-64-etm@openssh.com supported
+  [Good] umac-128-etm@openssh.com supported
 
-[Info] Testing authentication methods supported...
-  [Info] publickey supported
-  [Warning] keyboard-interactive supported
+[Info] Evaluating SSH KEX Algorithms...
+  [Good] diffie-hellman-group1-sha1 supported
+  [Good] diffie-hellman-group14-sha1 supported
+  [Good] diffie-hellman-group-exchange-sha1 supported
+  [Good] diffie-hellman-group-exchange-sha256 supported
 ```
