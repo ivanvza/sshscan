@@ -23,7 +23,7 @@ options.add_option('-i', '--IP', type='string', dest='IP', help='The hostname / 
 options.add_option('-p', '--port', type='string', dest='port', help='Port of the SSH')
 options.add_option("-v", action="store_true", dest="verbose", help="Verbose, show all information")
 
-ciphers = ('3des-cbc', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'arcfour', 'blowfish-cbc', 'cast128-cbc', 'twofish-cbc', 'twofish128-cbc', 'twofish192-cbc', 'twofish256-cbc', 'cast128-12-cbc@ssh.com', 'des-cbc@ssh.com', 'seed-cbc@ssh.com', 'rijndael-cbc@ssh.com')
+ciphers = ('3des-cbc', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'arcfour128', 'arcfour256', 'blowfish-cbc', 'cast128-cbc', 'twofish-cbc', 'twofish128-cbc', 'twofish192-cbc', 'twofish256-cbc', 'cast128-12-cbc@ssh.com', 'des-cbc@ssh.com', 'seed-cbc@ssh.com', 'rijndael-cbc@ssh.com')
 weak_ciphers = ('3des-cbc', 'aes128-cbc', 'aes192-cbc', 'aes256-cbc', 'blowfish-cbc', 'cast128-cbc', 'rijndael-cbc@lysator.liu.se')
 macs = ('hmac-md5', 'hmac-md5-96', 'hmac-sha1', 'hmac-sha1-96', 'hmac-sha256@ssh.com', 'hmac-sha256-96@ssh.com')
 weak_macs = ('hmac-md5', 'hmac-md5-96', 'hmac-sha1-96')
