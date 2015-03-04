@@ -39,10 +39,10 @@ def connect(ip, port):
     except socket.error as e:
         if e.errno == 61:
             print(bcolours.FAIL + '[Error] Connection failed! ' + e.strerror + bcolours.ENDC)
-            return False
+            sys.exit(3)
         else:
             print(bcolours.FAIL + '[Error] Failed to connect...' + bcolours.ENDC)
-            return False
+            sys.exit(3)
 
 def get_banner(data):
     print('\n' + bcolours.OKGREEN + '[Info] Banner: ' + data + bcolours.ENDC)
