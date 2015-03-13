@@ -5,7 +5,7 @@ import re
 import socket
 import optparse
 
-options = optparse.OptionParser(usage='%prog -i <IP>', description='SSH configuration scanner')
+options = optparse.OptionParser(usage='%prog -t <IP>', description='SSH configuration scanner')
 options.add_option('-t', '--target', type='string', dest='target', help='The target hostname / IP')
 options.add_option('-p', '--port', type='string', dest='port', default='22', help='Port of the SSH')
 options.add_option("-v", action="store_true", dest="verbose", help="Verbose, show all information")
