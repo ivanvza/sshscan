@@ -67,8 +67,8 @@ def parse_ciphers(data,verbose):
     parser(ciphers,weak_ciphers,data,verbose)
 
 def parse_macs(data,verbose):
-    macs = ('hmac-md5', 'hmac-md5-96', 'hmac-ripemd160', 'hmac-sha1', 'hmac-sha1-96', 'hmac-sha2-256', 'hmac-sha2-512', 'umac-64', 'umac-128', 'hmac-md5-etm@openssh.com', 'hmac-md5-96-etm@openssh.com', 'hmac-ripemd160-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'hmac-sha1-96-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'umac-64-etm@openssh.com', 'umac-128-etm@openssh.com')
-    weak_macs = ('hmac-md5', 'hmac-md5-96', 'hmac-sha1-96')
+    macs = ('hmac-md5', 'hmac-md5-96', 'hmac-ripemd160', 'hmac-sha1', 'hmac-sha1-96', 'hmac-sha2-256', 'hmac-sha2-512', 'umac-64', 'umac-128', 'hmac-md5-etm@openssh.com', 'hmac-md5-96-etm@openssh.com', 'hmac-ripemd160-etm@openssh.com', 'hmac-sha1-etm@openssh.com', 'hmac-sha1-96-etm@openssh.com', 'hmac-sha2-256-etm@openssh.com', 'hmac-sha2-512-etm@openssh.com', 'umac-64-etm@openssh.com', 'umac-128-etm@openssh.com', 'arcfour', 'arcfour128', 'arcfour256')
+    weak_macs = ('hmac-md5', 'hmac-md5-96', 'hmac-sha1-96', 'arcfour', 'arcfour128', 'arcfour256')
     print('\n' + bcolours.OKGREEN + '[Info] Evaluating SSH MAC Algorithms...' + bcolours.ENDC)
     parser(macs,weak_macs,data,verbose)
 
